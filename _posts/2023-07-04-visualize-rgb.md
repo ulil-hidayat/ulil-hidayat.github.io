@@ -1,21 +1,21 @@
 ---
 layout: post
-title: "Visualize RGB Satelite With Python"
-subtitle: "Basic for open satelite data in python and how to do some improvement in that data."
+title: "Visualize RGB Satellite Data With Python"
+subtitle: "A Basic Guide to Handling Satellite Data in Python and Making Improvements"
 background: '/img/posts/01.jpg'
 ---
 
 ## Background
-This tutorial was made with purpose to help some people that want to learn about visualize data in python (specific in netcdf file). In this case, we will take a look how to do RGB composite in satelite data.
+This tutorial is designed to assist individuals who want to learn how to visualize data in Python, specifically using NetCDF files. In this case, we will explore how to create an RGB composite from satellite data.
 
 ## Data
-For data that used in this tutorial is from jaxa. We use filezilla to acces the data via ftp jaxa.  Get the acces data via this site:
+The data used in this tutorial is sourced from JAXA (Japan Aerospace Exploration Agency). We accessed the data via FTP using FileZilla. To access the data, please visit the following website:
 ```
 https://www.eorc.jaxa.jp/ptree/index.html
 ```
 
 ## Installing Packages
-First step, we need to install some packages that we need in this tutorial.
+First, we need to install some packages for this tutorial.
 ```
 from netCDF4 import Dataset
 import numpy as np
@@ -24,22 +24,21 @@ import imageio
 import matplotlib.image as im
 from PIL import Image
 from mpl_toolkits.basemap import Basemap
-import pylab
 ```
-
-There are some module that maybe some of them is you guys already familiar with that.
+There are some modules, and you may already be familiar with some of them.
 
 ## Open Data
-We use Module NetCDF4 with Dataset Function to open our data.
+We use the NetCDF4 module with the Dataset function to open our data.
+
 ```
-PATH = '/home/evan/himawari/'
-data = PATH+'NC_H09_20230401_0610_R21_FLDK.02401_02401.nc'
+PATH = '/media/evan/A8242CC6242C9978/04092023/'
+data = PATH+'NC_H08_20150825_0600_R21_FLDK.06001_06001.nc'
 ds = Dataset(data,'r')
 ```
-First we need write our path data. This step not only for python can find our data, but also to specify path folder to save our output. Combine PATH and name file of pur data, assign as 'data'. Last, open data with Dataset and assign as ds (The 'r' in ds line is for make our file become readable in python, in some case it is not really needed, but in this tutorial i'll use that)
+First, we need to specify the path to our data. This step is necessary not only for Python to find our data but also to specify the folder path for saving our output. We combine PATH with the filename of our data and assign it as 'data'. Finally, we open the data using the Dataset function and assign it to ds. The 'r' in the ds line is used to make our file readable in Python. In some cases, it may not be necessary, but in this tutorial, I'll use it.
 
 ## Assign The Variable
-Now we must assign the variable of our data, so we can process that.
+Now, we must assign the variables from our data so that we can process them.
 ```
 b1 = ds.variables['albedo_01'][:]
 b2 = ds.variables['albedo_02'][:]
@@ -47,96 +46,62 @@ b3 = ds.variables['albedo_03'][:]
 lons = ds.variables['longitude'][:]
 lats = ds.variables['latitude'][:]
 ```
-In this example, i take band1, band2, and band3 from our data to make RGB True Color. In our data from jaxa himawari, the band1 until band6 are name by 'albedo_xx' which is xx is the number of band (note: for band8 until last band are name by 'tbb_xx'). Don't forget to also assign the lons and lats variable. By the way, the symbol [:] in the end of every line is mean that we want to take 'all' of that value (in some case we can seleect or specif the range).
+In this example, I've taken band1, band2, and band3 from our data to create an RGB True Color image. In our JAXA Himawari data, the bands are named 'albedo_xx' where xx is the band number. (Note: Bands from 8 to the last band are named 'tbb_xx'). Don't forget to also assign the 'lons' and 'lats' variables. The symbol '[:]' at the end of each line indicates that we want to select 'all' of the values. In some cases, we can specify a range instead.
 
-## Assign Red, Green, and Blue Band
-In this step, we assign our variable to new variable called red, gree, and blue.
+## Assigning Red, Green, and Blue Bands
+In this step, we assign our variables to new variables called red, green, and blue.
 ```
 red = b3
 green = b2
 blue = b1
 
 def norm(band):
-    band_min, band_max = np.nanmin(band), np.nanmax(band)
+    band_min, band_max = np.nanpercentile(band,2), np.nanpercentile(band,98)
     return ((band-band_min)/(band_max-band_min))
 
 r = norm(red.astype(float))
 g = norm(green.astype(float))
 b = norm(blue.astype(float))
 ```
-After that we do some extra step, called by normalization value of each band. This step is called 'extra' because even though we don't do that, the script is still work properly. But, the output is not realy like we wanted (the output will displaye a litle bit darker than we expect). So, we do this step with use norm function. The output data after get normalize is assign as r,g, and b variales. For more detail about that function, see this:
+After that, we perform an additional step known as normalizing the values of each band. This step is considered 'extra' because the script will still function correctly without it, but the output may not match our expectations (it will appear slightly darker). Therefore, we perform this step using the 'norm' function. The resulting normalized data is assigned to the 'r', 'g', and 'b' variables. For more details about this normalization process, you can refer to this link: 
 ```
 https://en.wikipedia.org/wiki/Feature_scaling#Rescaling_(min-max_normalization)
 ```
 
-## Stack the Data (Make RGB)
-In python, for make rgb composite, we use 'dstack' function from numpy.
+## Stacking the Data (Creating RGB)
+In Python, to create an RGB composite, we use the 'dstack' function from numpy.
 ```
-rgb = np.dstack((r,g,b)) 
-rgb_image = (rgb*255).astype('uint8')
-imageio.imwrite(PATH+'rgbtruecolor1.tif', rgb_image)
+rgb = np.dstack((r,g,b))
+extent = [80, 200, -60, 60]
 ```
-after we perfrom dstack, we assign that variable to astype(uint8). Maybe some of you ask, why we apply the rgb with 255?, the answer is to make our data come back like usual. Because after perform norm function, the range value of our data become 0 until 1. In other words, we just need the norm function to apply in dstack function. Finally, we connvert our rgb_image to tiff file (why? this because tif file is more likely easy to read and plot, more detaill can see in step after basemap)
+After performing the 'dstack' operation, we assign that variable and convert it to 'uint8' data type for proper display.
 
-## Display Basemap
-For nice plotting, we display the basemap.
+## Displaying the Basemap
+For an aesthetically pleasing plot, we display the basemap.
 ```
-below,above,left,right = -5, 5, 110, 120 #Area Of Interest
-m = Basemap(projection='cyl',llcrnrlat=below,llcrnrlon=left,urcrnrlat=above,urcrnrlon=right,resolution='h',)
-xv, yv = pylab.meshgrid(lons, lats) #using pylab for meshgrid
-lon, lat = m(xv,yv)
-paralles = pylab.arange(-90.0,90.0,2)
-meridians = pylab.arange(0.,360.,2)
+below,above,left,right = -10, 10, 100, 130 #AOI
+#below,above,left,right = -1, 4, 115, 120 #AOI
+m = Basemap(projection='cyl',resolution='h',llcrnrlat=below,llcrnrlon=left,urcrnrlat=above,urcrnrlon=right)
 m.drawcoastlines(color='white')
-
-
-#m.fillcontinents(color='coral',lake_color='aqua') #for this line, if u want use that, remove the '#' symbol
-#m.drawparallels(paralles,labels=[1,0,0,1],dashes = [5,5], fontsize=8)
-#m.drawmeridians(meridians,labels=[1,0,0,1],dashes = [5,5],fontsize=8)
+#m.drawparallels(np.arange(-90,90,3),labels=[1,0,0,1],dashes = [5,5], fontsize=8)
+#m.drawmeridians(np.arange(-180,180,3),labels=[1,0,0,1],dashes = [5,5],fontsize=8)
 ```
-First we specify our AOI (Area Of Interest), by the way, if in our plotting data is not as large aoi our basemap, it;s okay, as long as the aoi plotting is include in aoi basemap. In 3 last line i'm not use that, because i only want to focus on rgb imagery (feel free if you want use that)
-
-## Open TIF File
-Now, we come to important part for introduction plotting. Finally, we open our output tif file with matplotlib.image (im).
-```
-file = PATH+'rgbtruecolor1.tif'
-img = im.imread(file)
-```
-
-## Extra Step Before Plotting
-Our tif file don't have coordinate variable like lon and lat. So, before perform plotting, we should assign the coordinate in that data.
-```
-r = m.transform_scalar(np.flipud(img[:,:,0]),lons,lats[::-1],len(lons),len(lats))
-g = m.transform_scalar(np.flipud(img[:,:,1]),lons,lats[::-1],len(lons),len(lats))
-b = m.transform_scalar(np.flipud(img[:,:,2]),lons,lats[::-1],len(lons),len(lats))
-```
-Tbh, the line seems really hard to understand, but actually no. This is just ordinary simple line. So we assign back the r, g, and b variable from our tiff data, and add lon and lats in that. Let's take a look one example, r variable lines.
-```
-r = m.transform_scalar(np.flipud(img[:,:,0]),lons,lats[::-1],len(lons),len(lats))
-```
-The line we provided appears to be using a function called transform_scalar to transform a scalar data array img[:,:,0] onto a new grid defined by longitude and latitude values.In summary, this line of code takes a scalar data array (img[:,:,0]), flips it vertically, and then transforms it onto a new grid defined by longitude (lons) and latitude (lats) values. The transformed data is stored in the variable r.
-
-## Stack Again and Convert To Array
-Now, it's litle bit different, which we stack the r, g, and b variables from our tiff data.
-The additional step is we convert our data after get stack to array data (so we can plot that).
-```
-rgb = np.array(np.dstack((r,g,b)),dtype='uint8')
-```
+First, we specify our Area of Interest (AOI). It's worth noting that if our plotting data is smaller than the AOI of our basemap, it's still acceptable as long as the plotting AOI is within the basemap's AOI. In the last two lines, I've commented out the latitude and longitude grid lines because I only want to focus on the RGB imagery. Feel free to uncomment those lines if you need them.
 
 ## Plotting
-Final step is plotting with imshow from basemap (why don't use imshow from matplotlib. the reason is to get smoother image because the basemap do interpolation in that).
+The final step is the plotting process.
 ```
-m.imshow((rgb),interpolation='nearest')
-plt.title('True Color RGB', fontsize=14)
+plt.imshow(rgb, extent=extent)
+plt.show()
 ```
 ## Output
-![rgb image](/img/posts/visualize-rgb/true_color.png)
+![rgb image](/img/posts/visualize-rgb/truecolor.png)
 
-## Built Function For Perform RGB Composite Automatically
-This is a extra part from this tutorial. It seems that our script above is too long and not effective if we want use the other file or perform other rgb, example false color. So, i bulit this one (the description is same with above).
+## Building a Function for Performing RGB Composite Automatically
+As an additional part of this tutorial, I've created a more concise function. The script above can become quite lengthy and less effective if you want to use it for other files or perform different types of RGB composites, such as false color. So, I've built this function (with a description similar to the one above).
 ```
-#programme for plotting rgb composite in himawari
-#note : himawari data is from https://www.eorc.jaxa.jp/ptree/index.html
+# Program for plotting RGB composite in Himawari
+# Note : Himawari data is from https://www.eorc.jaxa.jp/ptree/index.html
 
 from netCDF4 import Dataset
 import numpy as np
@@ -180,45 +145,33 @@ def rgbcomposite(band1, band2, band3, below, above, left, right):
     lons = ds.variables['longitude'][:]
     lats = ds.variables['latitude'][:]
 
+    #RGB Composition (for true color; BAND 3,2,1)
     red = b1
     green = b2
     blue = b3
 
     def norm(band):
-        band_min, band_max = np.nanmin(band), np.nanmax(band)
+        band_min, band_max = np.nanpercentile(band,2), np.nanpercentile(band,98)
         return ((band-band_min)/(band_max-band_min))
-    
+
     r = norm(red.astype(float))
     g = norm(green.astype(float))
     b = norm(blue.astype(float))
+
     rgb = np.dstack((r,g,b))
-    rgb_image = (rgb*255).astype('uint8')
-    imageio.imwrite(PATH+'rgb.tif', rgb_image)
-    
-    m = Basemap(projection='cyl',llcrnrlat=below,llcrnrlon=left,urcrnrlat=above,urcrnrlon=right,resolution='h',)
-    xv, yv = pylab.meshgrid(lons, lats)
-    lon, lat = m(xv,yv)
-    paralles = pylab.arange(-90.0,90.0,2)
-    meridians = pylab.arange(0.,360.,2)
+    extent = [80, 200, -60, 60]
+
+    m = Basemap(projection='cyl',resolution='h',llcrnrlat=below,llcrnrlon=left,urcrnrlat=above,urcrnrlon=right)
     m.drawcoastlines(color='white')
-    #m.fillcontinents(color='coral',lake_color='aqua')
-    # #m.drawparallels(paralles,labels=[1,0,0,1],dashes = [5,5], fontsize=8)
-    # #m.drawmeridians(meridians,labels=[1,0,0,1],dashes = [5,5],fontsize=8)
-    file = PATH+'rgb.tif'
-    img = im.imread(file)
-    
-    r = m.transform_scalar(np.flipud(img[:,:,0]),lons,lats[::-1],len(lons),len(lats))
-    g = m.transform_scalar(np.flipud(img[:,:,1]),lons,lats[::-1],len(lons),len(lats))
-    b = m.transform_scalar(np.flipud(img[:,:,2]),lons,lats[::-1],len(lons),len(lats))
-    rgb = np.array(np.dstack((r,g,b)),dtype='uint8')
-    
-    plot = m.imshow((rgb),interpolation='nearest')
-    plt.title(title, fontsize=14)
-    return plot
+    #m.drawparallels(np.arange(-90,90,3),labels=[1,0,0,1],dashes = [5,5], fontsize=8)
+    #m.drawmeridians(np.arange(-180,180,3),labels=[1,0,0,1],dashes = [5,5],fontsize=8)
 
-display = rgbcomposite(band1,band2,band3, below, above, left, right)
+    plt.imshow(rgb, extent=extent)
+    plt.show()
+
+# If you don't want to use input manually, you can directly call the function like this:
+rgbcomposite(3, 2, 1, -10, 10, 100, 130)
 ```
-Thank you, hope that's help.
-
+Thank you for reading this tutorial. I hope you find it helpful. If you have any questions or need further assistance, please feel free to ask. Your feedback is valuable.
 
 
