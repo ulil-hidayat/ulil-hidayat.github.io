@@ -2,7 +2,7 @@
 layout: post
 title: "Visualize RGB Satellite Data With Python"
 subtitle: "A Basic Guide to Handling Satellite Data in Python and Making Improvements"
-background: '/img/posts/01.jpg'
+background: '/img/posts/visualize-rgb/truecolor.png'
 ---
 
 ## Background
