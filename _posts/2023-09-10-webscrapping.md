@@ -2,7 +2,7 @@
 layout: post
 title: "Automatic Download of METAR Data using Web Scraping"
 subtitle: "A Method to Download METAR Data using Web Scraping"
-background: '/img/posts/visualize-rgb/truecolor.png'
+background: '/img/posts/web-scrapping/front.png'
 ---
 
 ## Background
@@ -22,6 +22,7 @@ First, we need to import some modules for this tutorial:
 #import module
 import pandas as pd
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -47,7 +48,7 @@ As described in the script, you only need to change the date, specifically the s
 Since the aviation website splits the data into pages, we need to count how many pages there are so that we can access them:
 ```
 def page_count(url, page=None):
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(url)
     driver.implicitly_wait(3)
     checkbox = driver.find_element(By.CSS_SELECTOR, "input[name='agreement']")
@@ -71,7 +72,7 @@ def page_count(url, page=None):
 In this step, we create a function for web scraping and downloading data:
 ```
 def importmetar(url, index, page=None, metar_value=None):
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(url)
     driver.implicitly_wait(3)
     checkbox = driver.find_element(By.CSS_SELECTOR, "input[name='agreement']")
@@ -153,6 +154,12 @@ print ('Script is finish, check the folder for the output file')
 #CAN'T CHANGE PART
 ```
 
+After run the script, this will be nottification like this:
+![notif image](/img/posts/web-scrapping/result1.png)
+
+And the result of data is like this:
+![result image](/img/posts/web-scrapping/result2.png)
+
 ## Complete Code
 To summarize, here's the combined script:  (or youc can acces this scrip in my github code : ) 
 
@@ -160,6 +167,7 @@ To summarize, here's the combined script:  (or youc can acces this scrip in my g
 #import module
 import pandas as pd
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -176,7 +184,7 @@ url = f'https://aviation.bmkg.go.id/web/metar_speci.php?icao={station}&sa=yes&fd
 
 # CANT'CHANGE PART (FROM HERE)
 def page_count(url, page=None):
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(url)
     driver.implicitly_wait(3)
     checkbox = driver.find_element(By.CSS_SELECTOR, "input[name='agreement']")
@@ -196,7 +204,7 @@ def page_count(url, page=None):
         page.append(total_pages)
     
 def importmetar(url, index, page=None, metar_value=None):
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(url)
     driver.implicitly_wait(3)
     checkbox = driver.find_element(By.CSS_SELECTOR, "input[name='agreement']")
