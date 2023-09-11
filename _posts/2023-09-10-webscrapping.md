@@ -6,7 +6,7 @@ background: '/img/posts/web-scrapping/front.png'
 ---
 
 ## Background
-Recently, I wanted to perform an analysis of METAR data from my station (WAQT). However, I discovered that the database containing METAR data was not complete, and I faced difficulties as a result. Then, I remembered that our data is actually recorded and saved on aviation.bmkg.go.id, which we can access and copy from. But, a problem arose: if I only needed data for a short time range, like one day, it was manageable. However, since my data spans one month, it became practically impossible to do it manually. So, I wondered if there was a way to automate this process. In this tutorial, I will show you how to do just that!
+Recently, I wanted to perform an analysis of METAR data from my station WAQT. However, I discovered that the database containing METAR data was not complete, and I faced difficulties as a result. Then, I remembered that our data is actually recorded and saved on aviation.bmkg.go.id, which we can access and copy from. But, a problem arose: if I only needed data for a short time range, like one day, it was manageable. However, since my data spans one month, it became practically impossible to do it manually. So, I wondered if there was a way to automate this process. In this tutorial, I will show you how to do just that!
 
 EXPORT_METAR is a script for exporting METAR values from a specific station automatically using Python. The basic idea is to scrape content data from the website aviation.bmkg.go.id. The output is in CSV file format. There are two main parts to this script: the "can change" part and the "can't change" part. Please do not modify the "can't change" part (marked with #).
 
