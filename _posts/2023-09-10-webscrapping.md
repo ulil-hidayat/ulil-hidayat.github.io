@@ -161,7 +161,7 @@ And the result of data is:
 ![result image](/img/posts/web-scrapping/result2.png)
 
 ## Complete Code
-To summarize, here's the combined script:  (or youc can acces this scrip in my github code : https://github.com/ulil-hidayat/My-Code/blob/9e2519ab52ac4bb35e5179cd1dc1b26e0f2e6142/script_postrgb.ipynb ) 
+To summarize, here's the combined script:  (or youc can acces this scrip in my github code : https://github.com/ulil-hidayat/My-Code/blob/3484dd5d9c21188b67a04dbd926a695af9badd4b/export_metar.ipynb) 
 
 ```
 #import module
