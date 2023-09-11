@@ -35,9 +35,9 @@ We must specify our desired time frame:
 ```
 #CAN CHANGE PART (change station, st_date (start date), time_st (time start), ed_date (end date), time_ed (time end))
 station = 'waqt' #icao index station
-st_date = ['12', '07', '2023'] # day, month, year  | ex  : 4 june 2023
+st_date = ['01', '06', '2023'] # day, month, year  | ex  : 01 june 2023
 time_st = ['00', '00'] #hour, minute    | ex : hour 00 minute 00
-ed_date = ['13', '07', '2023'] #same w/st_date
+ed_date = ['30', '06', '2023'] #same w/st_date (1 month)
 time_ed = ['01', '00'] #same with time_st
 url = f'https://aviation.bmkg.go.id/web/metar_speci.php?icao={station}&sa=yes&fd={st_date[0]}%2F{st_date[1]}%2F{st_date[2]}&fh={time_st[0]}&fm={time_st[1]}&ud={ed_date[0]}%2F{ed_date[1]}%2F{ed_date[2]}&uh={time_ed[0]}&um={time_ed[1]}&f=raw_format'
 #CAN CHANGE PART (UNTIL THIS)
@@ -154,14 +154,14 @@ print ('Script is finish, check the folder for the output file')
 #CAN'T CHANGE PART
 ```
 
-After run the script, this will be nottification like this:
+After run the script, this will be notiffication like this:
 ![notif image](/img/posts/web-scrapping/result1.png)
 
-And the result of data is like this:
+And the result of data is:
 ![result image](/img/posts/web-scrapping/result2.png)
 
 ## Complete Code
-To summarize, here's the combined script:  (or youc can acces this scrip in my github code : ) 
+To summarize, here's the combined script:  (or youc can acces this scrip in my github code : https://github.com/ulil-hidayat/My-Code/blob/9e2519ab52ac4bb35e5179cd1dc1b26e0f2e6142/script_postrgb.ipynb ) 
 
 ```
 #import module
@@ -175,9 +175,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 #CAN CHANGE PART (change station, st_date (start date), time_st (time start), ed_date (end date), time_ed (time end))
 station = 'waqt' #icao index station
-st_date = ['12', '07', '2023'] # day, month, year  | ex  : 4 june 2023
+st_date = ['01', '06', '2023'] # day, month, year  | ex  : 01 june 2023
 time_st = ['00', '00'] #hour, minute    | ex : hour 00 minute 00
-ed_date = ['13', '07', '2023'] #same w/st_date
+ed_date = ['30', '06', '2023'] #same w/st_date (1 month)
 time_ed = ['01', '00'] #same with time_st
 url = f'https://aviation.bmkg.go.id/web/metar_speci.php?icao={station}&sa=yes&fd={st_date[0]}%2F{st_date[1]}%2F{st_date[2]}&fh={time_st[0]}&fm={time_st[1]}&ud={ed_date[0]}%2F{ed_date[1]}%2F{ed_date[2]}&uh={time_ed[0]}&um={time_ed[1]}&f=raw_format'
 #CAN CHANGE PART (UNTIL THIS)
