@@ -16,7 +16,9 @@ https://www.sciencedirect.com/book/9780128158234/statistical-methods-in-the-atmo
 ## Definition and Basic Description
 Boxplot a.k.a box-whisker plot is a simple plot of five sample quantiles: the minimum, lower quartile (q1), median (q2), upper quartile (q3), and the maximum. Using these five numbers, we can make a quick sketch about the distribution of underlying data.
 
-![picture1 image](/img/posts/understanding-boxplot/picture1.png)
+<div style="text-align:center;">
+  <img src="/img/posts/understanding-boxplot/picture1.png" alt="picture1 image">
+</div>
 
 The picture above shows the simple boxplot. From the plot, there are some points that we can get, among them are:
 
@@ -33,8 +35,9 @@ Nah, the creator of boxplot, also think about that, so he came with this method,
 
 In simple term, schematics plots is the advance method of boxplot. There are some modification, that answer the question from last paragraph.
 
-![picture2 image](/img/posts/understanding-boxplot/picture2.png)
-
+<div style="text-align:center;">
+  <img src="/img/posts/understanding-boxplot/picture2.png" alt="picture2 image">
+</div>
 
 The schematic plot is identical to the boxplot, except that extreme points deemed to be sufficiently unusual/anomaly are plotted individually. Just how extreme is sufficiently unusual depends on the variability of the data in the central part of the sample, as reflected by the IQR. A given extreme value is regarded as being less unusual if the two quartiles are far apart (i.e., if the IQR is large), and more unusual if the two quartiles are near each other (the IQR is small).
 
@@ -46,7 +49,9 @@ Line that divide less-more unusual the data is called by “fences”. There are
 
 Which is, the value of the fence can be found by formula :
 
-![picture3 image](/img/posts/understanding-boxplot/picture3.png)
+<div style="text-align:center;">
+  <img src="/img/posts/understanding-boxplot/picture3.png" alt="picture3 image">
+</div>
 
 The data which exceeds the inner fence called by outsider, and the data which exceeds the outter fence called by far-out.
 
@@ -76,10 +81,12 @@ Example :
 in boxplot below, contain information about LFC in Natuna Island when Cold Surge active. If we look from the IQR and Q1 Q3, the data in 12 UTC more distributed compare with the data in 00 UTC, either CS or NS. CS00 data is well distributed (median data (line) is fit on the middle box). Majority of the data distributed on 940 – 960 hPa, with some outsider on 890 – 930 hPa. Compare with NS00, LFC when CS exist IN 00 UTC have decreased in value (Median CS00 = 955 hPa, NS00 = 968 hPa). Although the average NS00 is smaller, but it is can’t represented well because a lot of outsider exist and have an extrem small values (range 840 – 925 hPa) and predispose/affect the average data.
 [continue with CS12 NS12, final step is make conclusion, Done]
 
-![picture4 image](/img/posts/understanding-boxplot/picture4.png)
+<div style="text-align:center;">
+  <img src="/img/posts/understanding-boxplot/picture4.png" alt="picture4 image">
+</div>
 
 Description of the picture: 
-CS00 = BLUE; CS12 = ORANGE;NS00 = GRAY;NS12 =YELLOW
+CS00 = Blue; CS12 = Orange;NS00 = Gray;NS12 =Yellow
 (CS00 : CS event in 00 UTC; NS12 : No CS in 12 UTC)
 
 Thanks for going through this tutorial. If you have any inquiries or require additional help, please don't hesitate to reach out.
