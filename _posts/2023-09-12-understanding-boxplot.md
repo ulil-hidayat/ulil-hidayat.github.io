@@ -10,7 +10,7 @@ In this transcript, I’ll explain about the boxplot and how to use in interpret
 
 Reference:
 ```
-Reference : https://www.sciencedirect.com/book/9780128158234/statistical-methods-in-the-atmospheric-sciences
+https://www.sciencedirect.com/book/9780128158234/statistical-methods-in-the-atmospheric-sciences
 ```
 
 ## Definition and Basic Description
@@ -53,8 +53,7 @@ The data which exceeds the inner fence called by outsider, and the data which ex
 Now, how we can interpret plot that have more than one boxplot. From reference, said that one important use of this plot is simultaneous graphical comparison of several batches of data.
 More detail in page 33 of the reference.
 
-Additional reference :
-why mean isn’t neccesary to display in boxplot :
+Additional reference "why mean isn’t neccesary to display in boxplot":
 ```
 https://stats.stackexchange.com/questions/269644/why-do-means-appear-outside-the-boxplot
 ```
@@ -70,7 +69,7 @@ compare to the other data from the same class, is the data more distributed or l
 
 Example :
 in boxplot below, contain information about LFC in Natuna Island when Cold Surge active. If we look from the IQR and Q1 Q3, the data in 12 UTC more distributed compare with the data in 00 UTC, either CS or NS. CS00 data is well distributed (median data (line) is fit on the middle box). Majority of the data distributed on 940 – 960 hPa, with some outsider on 890 – 930 hPa. Compare with NS00, LFC when CS exist IN 00 UTC have decreased in value (Median CS00 = 955 hPa, NS00 = 968 hPa). Although the average NS00 is smaller, but it is can’t represented well because a lot of outsider exist and have an extrem small values (range 840 – 925 hPa) and predispose/affect the average data.
-[AND CONTINUE W/ CS12 NS12, FINAL STEP MAKE CONCLUSION, DONE]
+[continue with CS12 NS12, final step is make conclusion, Done]
 
 ![picture4 image](/img/posts/understanding-boxplot/picture4.png)
 
