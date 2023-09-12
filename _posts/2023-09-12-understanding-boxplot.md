@@ -67,6 +67,11 @@ compare to the other data from the same class, is the data more distributed or l
 3. Median data is a key for specifying, did the data change, become more or less.
 4. Average, in some cases, we should’nt use, because the bias value is very bigger, along the more outsider exist. So, if you wanna use this paramter, make sure the data don’t have a lot of outsider.
 
+The paper that i take for an example intepretation is:
+```
+https://journal.unesa.ac.id/index.php/jpfa/article/view/22594
+```
+
 Example :
 in boxplot below, contain information about LFC in Natuna Island when Cold Surge active. If we look from the IQR and Q1 Q3, the data in 12 UTC more distributed compare with the data in 00 UTC, either CS or NS. CS00 data is well distributed (median data (line) is fit on the middle box). Majority of the data distributed on 940 – 960 hPa, with some outsider on 890 – 930 hPa. Compare with NS00, LFC when CS exist IN 00 UTC have decreased in value (Median CS00 = 955 hPa, NS00 = 968 hPa). Although the average NS00 is smaller, but it is can’t represented well because a lot of outsider exist and have an extrem small values (range 840 – 925 hPa) and predispose/affect the average data.
 [continue with CS12 NS12, final step is make conclusion, Done]
