@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Enhancing Satellite Himawari's Spatial Resolution"
+title: "Enhancing Himawari Satellite Spatial Resolution"
 subtitle: "Improving data resolution from 2 km (or 1 km) to 0.5 km"
 background: '/img/posts/enhancing-res/pic2.png'
 ---
