@@ -2,7 +2,7 @@
 layout: post
 title: "Enhancing Himawari Satellite Spatial Resolution"
 subtitle: "Improving data resolution from 2 km (or 1 km) to 0.5 km"
-background: '/img/posts/enhancing-res/pic2.png'
+background: '/img/posts/enhancing-res/pict2.png'
 ---
 
 ## Background
@@ -150,7 +150,7 @@ m = Basemap(projection='cyl',llcrnrlat=below,llcrnrlon=left,urcrnrlat=above,urcr
 m.drawcoastlines(color='black')
 
 data2.plot(cmap='gray', vmin=0, vmax=0.6)
-plt.title('Band 4 High Res')
+plt.title('Band 4 After Enhancing')
 plt.show()
 ```
 
@@ -158,8 +158,8 @@ Do the same for band 5.
 
 For comparison, the plots for band 4 low-resolution and band 5 low-resolution data are also included. Here is the comparison of the data.
 
-![Band 4 Low res vs High res](/img/posts/enhancing-res/pic1.png)
-![Band 5 Low res vs High res](/img/posts/enhancing-res/pic2.png)
+![Band 4 Low res vs High res](/img/posts/enhancing-res/pict1.png)
+![Band 5 Low res vs High res](/img/posts/enhancing-res/pict2.png)
 
 For full version of the code, check this repository:
 ```
