@@ -161,6 +161,11 @@ For comparison, the plots for band 4 low-resolution and band 5 low-resolution da
 ![Band 4 Low res vs High res](/img/posts/enhancing-res/pic1.png)
 ![Band 5 Low res vs High res](/img/posts/enhancing-res/pic2.png)
 
+For full version of the code, check this repository:
+```
+https://github.com/ulil-hidayat/enhancing-himawari-resolution
+```
+
 Thank you for reading this tutorial. I hope you find it helpful. If you have any questions or need further assistance, please feel free to ask on ulil.hidayat@bmkg.go,id
 
 
