@@ -171,7 +171,7 @@ The final output is displayed below.
 
 For full version of the code, check this repository:
 ```
-https://github.com/ulil-hidayat/enhancing-himawari-resolution
+https://github.com/ulil-hidayat/volcanic-ash-detection
 ```
 
 Thank you for reading this tutorial. I hope you find it helpful. If you have any questions or need further assistance, please feel free to ask on ulil.hidayat@bmkg.go,id
